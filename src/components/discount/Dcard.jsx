@@ -1,9 +1,6 @@
-import React from "react"
-import Slider from "react-slick"
-import "slick-carousel/slick/slick.css"
-import "slick-carousel/slick/slick-theme.css"
-import Ddata from "./Ddata"
-import "../newarrivals/style.css"
+import React, { useState, useEffect } from "react";
+import Slider from "react-slick";
+import axios from 'axios';
 
 const Dcard = () => {
   const settings = {
@@ -12,26 +9,33 @@ const Dcard = () => {
     slidesToShow: 6,
     slidesToScroll: 1,
     autoplay: true,
-  }
-  return (
-    <>
-      <Slider {...settings}>
-        {Ddata.map((value, index) => {
-          return (
-            <>
-              <div className='box product' key={index}>
-                <div className='img'>
-                  <img src={value.cover} alt='' width='100%' />
-                </div>
-                <h4>{value.name}</h4>
-                <span>{value.price}</span>
-              </div>
-            </>
-          )
-        })}
-      </Slider>
-    </>
-  )
-}
+  };
+  const [products, setProducts] = useState([]);
 
-export default Dcard
+  useEffect(() => {
+    axios.get('http://localhost:8080/v1/api/products?page=0&limit=9')
+      .then(response => {
+        setProducts(response.data.products);
+      })
+      .catch(error => {
+        console.error('Error fetching products:', error);
+      });
+  }, []);
+
+  return (
+    <div>
+      <Slider {...settings}>
+        {products.map((product, index) => (
+          <div key={index}>
+            <h3>{product.name}</h3>
+            <p>Price: {product.price}</p>
+            <img src={product.thumbnail} alt={product.name} />
+            {/* Add more elements to display other properties if needed */}
+          </div>
+        ))}
+      </Slider>
+    </div>
+  );
+};
+
+export default Dcard;
