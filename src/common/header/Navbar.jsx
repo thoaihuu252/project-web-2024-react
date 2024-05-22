@@ -1,9 +1,18 @@
-import React, { useState } from "react"
-import { Link } from "react-router-dom"
+import React, { useState,useEffect  } from "react"
+import { Link ,useHistory } from "react-router-dom"
 
-const Navbar = () => {
+
+const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
   // Toogle Menu
+  const history = useHistory();
   const [MobileMenu, setMobileMenu] = useState(false)
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
+    history.push('/login');
+  };
+
   return (
     <>
       <header className='header'>
@@ -25,10 +34,7 @@ const Navbar = () => {
                 <Link to='/pages'>pages</Link>
               </li>
               <li>
-                <Link to='/user'>user account</Link>
-              </li>
-              <li>
-                <Link to='/vendor'>vendor account</Link>
+                <Link to='/user'>Account</Link>
               </li>
               <li>
                 <Link to='/track'>track my order</Link>
@@ -36,6 +42,15 @@ const Navbar = () => {
               <li>
                 <Link to='/contact'>contact</Link>
               </li>
+               {isLoggedIn ? (
+                  <li onClick={handleLogout} style={{ cursor: 'pointer' }}>
+                  Logout
+                </li>
+              ) : (
+                <li>
+                  <Link to='/login'>Login</Link>
+                </li>
+              )}
             </ul>
 
             <button className='toggle' onClick={() => setMobileMenu(!MobileMenu)}>
