@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route  } from "react-router-dom";
 import Header from "./common/header/Header";
 import Pages from "./pages/Pages";
 import Cart from "./common/Cart/Cart";
 import Footer from "./common/footer/Footer";
+import LoginForm from "./components/Login/login";
 
 function App() {
   const [productItems, setProductItems] = useState([]);
   const [shopItems, setShopItems] = useState([]);
   const [CartItem, setCartItem] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     //lấy dữ liệu sản phẩm
@@ -67,13 +69,16 @@ function App() {
 
   return (
     <Router>
-      <Header CartItem={CartItem} />
+      <Header CartItem={CartItem} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <Switch>
         <Route path="/" exact>
           <Pages productItems={productItems} addToCart={addToCart} shopItems={shopItems} />
         </Route>
         <Route path="/cart" exact>
           <Cart CartItem={CartItem} addToCart={addToCart} decreaseQty={decreaseQty} />
+        </Route>
+        <Route path="/login" exact>
+          <LoginForm setIsLoggedIn={setIsLoggedIn} />
         </Route>
       </Switch>
       <Footer />
