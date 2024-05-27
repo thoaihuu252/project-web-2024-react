@@ -1,10 +1,24 @@
-import React from "react"
+import React,{ useState, useEffect } from "react"
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
-import Tdata from "./Tdata"
+
+import axios from 'axios';
 
 const TopCart = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/v1/api/products?page=0&limit=9')
+      .then(response => {
+        setProducts(response.data.products);
+      })
+      .catch(error => {
+        console.error('Error fetching products:', error);
+      });
+  }, []);
+
+
   const settings = {
     dots: false,
     infinite: true,
@@ -15,16 +29,16 @@ const TopCart = () => {
   return (
     <>
       <Slider {...settings}>
-        {Tdata.map((value, index) => {
+        {products.map((product, index) => {
           return (
             <>
               <div className='box product' key={index}>
                 <div className='nametop d_flex'>
-                  <span className='tleft'>{value.para}</span>
-                  <span className='tright'>{value.desc}</span>
+                  <span className='tleft'>{product.name}</span>
+                  <span className='tright'>{product.price}</span>
                 </div>
                 <div className='img'>
-                  <img src={value.cover} alt='' />
+                  <img src={product.thumbnail} alt='' />
                 </div>
               </div>
             </>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import axios from 'axios';
+import './Dcard.css'; 
 
 const Dcard = () => {
   const settings = {
@@ -26,11 +27,11 @@ const Dcard = () => {
     <div>
       <Slider {...settings}>
         {products.map((product, index) => (
-          <div key={index}>
+          <div key={index} className="Dcard">
+      
             <h3>{product.name}</h3>
             <p>Price: {product.price}</p>
-            <img src={product.thumbnail} alt={product.name} />
-            {/* Add more elements to display other properties if needed */}
+              <img src={product.thumbnail} alt={product.name}/>         
           </div>
         ))}
       </Slider>
