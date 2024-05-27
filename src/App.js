@@ -6,6 +6,7 @@ import Pages from "./pages/Pages";
 import Cart from "./common/Cart/Cart";
 import Footer from "./common/footer/Footer";
 import LoginForm from "./components/Login/login";
+import Stores from "./pages/Store"
 
 function App() {
   const [productItems, setProductItems] = useState([]);
@@ -39,13 +40,17 @@ function App() {
       .catch(error => console.error('Error fetching shop items:', error));
   }, []);
 
-  const addToCart = (product) => {
-    const productExit = CartItem.find((item) => item.id === product.id);
-
-    if (productExit) {
+  const addToCart = (event, product) => {
+    event.stopPropagation();
+  
+    const productExist = CartItem.find((item) => item.productId === product.productId);
+  
+    if (productExist) {
       setCartItem(
         CartItem.map((item) =>
-          item.id === product.id ? { ...productExit, qty: productExit.qty + 1 } : item
+          item.productId === product.productId
+            ? { ...productExist, qty: productExist.qty + 1 }
+            : item
         )
       );
     } else {
@@ -74,6 +79,10 @@ function App() {
         <Route path="/" exact>
           <Pages productItems={productItems} addToCart={addToCart} shopItems={shopItems} />
         </Route>
+        <Route path="/store">
+          <Stores addToCart={addToCart} /> 
+        </Route>
+
         <Route path="/cart" exact>
           <Cart CartItem={CartItem} addToCart={addToCart} decreaseQty={decreaseQty} />
         </Route>

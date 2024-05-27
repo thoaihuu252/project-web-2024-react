@@ -1,0 +1,11 @@
+.Dcard{
+    background-color: #f6f9fc;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.Dcard img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 5px;
+  }
+  

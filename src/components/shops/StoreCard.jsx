@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory  } from "react-router-dom";
 
-const ShopCart = ({ shopItems, addToCart }) => {
+const StoreCard = ({ shopItems, addToCart }) => {
   const [count, setCount] = useState(0);
   const history = useHistory();
 
@@ -39,10 +39,8 @@ const ShopCart = ({ shopItems, addToCart }) => {
                 </div>
                 <div className='price'>
                   <h4>${shopItems.price}.00 </h4>
-                  {/* step : 3  
-                     if hami le button ma click garryo bahne 
-                    */}
-                  <button onClick={(event) => addToCart( event ,shopItems)}>
+              
+                  <button onClick={(event) => addToCart(event,shopItems)}>
                     <i className='fa fa-plus'></i>
                   </button>
                 </div>
@@ -55,4 +53,4 @@ const ShopCart = ({ shopItems, addToCart }) => {
   )
 }
 
-export default ShopCart
+export default StoreCard

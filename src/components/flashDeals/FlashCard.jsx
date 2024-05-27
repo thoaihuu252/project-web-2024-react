@@ -45,7 +45,7 @@ const FlashCard = ({ productItems, addToCart }) => {
           return (
             <div className='box'>
               <div className='product mtop'>
-                <div className='img'>
+                <div className='imgFlCard'>
                   <span className='discount'>20% Off</span>
                   <img src={productItems.thumbnail} alt='' />
                   <div className='product-like'>
