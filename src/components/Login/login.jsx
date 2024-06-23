@@ -24,6 +24,7 @@ const LoginForm = ({ setIsLoggedIn }) => {
       const token = await login(phoneNumber, password);
       console.log('Logged in successfully:', token);
       localStorage.setItem('token', token);
+      console.log(token);
       setIsLoggedIn(true);
       history.push('/');
     } catch (error) {
@@ -65,6 +66,10 @@ const LoginForm = ({ setIsLoggedIn }) => {
       </div>
       {error && <p className="custom-error">{error}</p>}
       <button className="custom-submit-button" type="submit">Login</button>
+      <p>
+            Don't have an account?{' '}
+            <Link to="/register">Register here</Link>
+        </p>
     </form>
   </div>
 );

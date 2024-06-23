@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory  } from "react-router-dom";
 
-const ShopCart = ({ shopItems, addToCart }) => {
+const StoreCard = ({ shopItems, addToCart }) => {
   const [count, setCount] = useState(0);
   const history = useHistory();
 
@@ -9,9 +9,8 @@ const ShopCart = ({ shopItems, addToCart }) => {
     setCount(count + 1)
   }
   const handleProductClick = (id) => {
-    // history.push(`/product/${id}`);
     window.scrollTo(0, 0)
-    history.push('/login');
+    history.push(`/product/${id}`);
   };
 
   return (
@@ -26,7 +25,7 @@ const ShopCart = ({ shopItems, addToCart }) => {
                   <label>{count}</label> <br />
                   <i className='fa-regular fa-heart' onClick={increment}></i>
                 </div>
-                <img src={shopItems.thumbnail} alt=''/> 
+                <img src={shopItems.thumbnail} style={{width:"220px" ,height:"100px"}} alt=''/> 
               </div>
               <div key={shopItems.productId} className='product-details' onClick={() => handleProductClick(shopItems.productId)} style={{ cursor: 'pointer' }} >
                 <h3>{shopItems.name}</h3>
@@ -38,11 +37,9 @@ const ShopCart = ({ shopItems, addToCart }) => {
                   <i className='fa fa-star'></i>
                 </div>
                 <div className='price'>
-                  <h4>${shopItems.price}.00 </h4>
-                  {/* step : 3  
-                     if hami le button ma click garryo bahne 
-                    */}
-                  <button onClick={(event) => addToCart( event ,shopItems)}>
+                  <h4>{shopItems.price} VND </h4>
+              
+                  <button onClick={(event) => addToCart(event,shopItems)}>
                     <i className='fa fa-plus'></i>
                   </button>
                 </div>
@@ -55,4 +52,4 @@ const ShopCart = ({ shopItems, addToCart }) => {
   )
 }
 
-export default ShopCart
+export default StoreCard

@@ -31,7 +31,7 @@ const Dcard = () => {
       
             <h3>{product.name}</h3>
             <p>Price: {product.price}</p>
-              <img src={product.thumbnail} alt={product.name}/>         
+              <img src={product.thumbnail} style={{height:"100px"}} alt={product.name}/>         
           </div>
         ))}
       </Slider>
