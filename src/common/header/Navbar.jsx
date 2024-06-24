@@ -7,6 +7,14 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
   const history = useHistory();
   const [MobileMenu, setMobileMenu] = useState(false)
 
+  useEffect(() => {
+      const token = localStorage.getItem('token');
+      if (token != null) {
+        setIsLoggedIn(true);
+        return;
+      }
+    })
+
   const handleLogout = () => {
     localStorage.removeItem('token');
     setIsLoggedIn(false);
@@ -34,10 +42,10 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
                 <Link to='/store'>Store</Link>
               </li>
               <li>
-                <Link to='/user'>Account</Link>
+                <Link to='/profile'>Account</Link>
               </li>
               <li>
-                <Link to='/track'>track my order</Link>
+                <Link to='/history'>History Order</Link>
               </li>
               <li>
                 <Link to='/contact'>contact</Link>

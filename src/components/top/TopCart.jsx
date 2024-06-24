@@ -38,7 +38,7 @@ const TopCart = () => {
                   <span className='tright'>{product.price}</span>
                 </div>
                 <div className='img'>
-                  <img src={product.thumbnail} alt='' />
+                  <img src={product.thumbnail} style={{width:"310px" ,height:"160px"}} alt='' />
                 </div>
               </div>
             </>

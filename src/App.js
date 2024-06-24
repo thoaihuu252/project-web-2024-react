@@ -1,12 +1,21 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route  } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route ,MemoryRouter  } from "react-router-dom";
 import Header from "./common/header/Header";
 import Pages from "./pages/Pages";
 import Cart from "./common/Cart/Cart";
 import Footer from "./common/footer/Footer";
+import Register from "./components/Login/Register";
 import LoginForm from "./components/Login/login";
 import Stores from "./pages/Store"
+import Profile from "./pages/Profile"
+import History from "./pages/HistoryOrder"
+import Product from "./pages/DProduct";
+import Dashboard from "./pages/Dashboard"
+import Products from "./pages/Products"
+import Waiting from "./components/Payment/Waiting"
+import Failure from "./components/Payment/Failure"
+import Success from "./components/Payment/Succes"
 
 function App() {
   const [productItems, setProductItems] = useState([]);
@@ -28,7 +37,7 @@ function App() {
       .catch(error => console.error('Error fetching products:', error));
 
     //lấy dữ liệu cửa hàng
-    fetch('http://localhost:8080/v1/api/products?page=0&limit=10')
+    fetch('http://localhost:8080/v1/api/products?page=0&limit=21')
       .then(response => response.json())
       .then(data => {
         if (Array.isArray(data.products)) {
@@ -74,6 +83,7 @@ function App() {
 
   return (
     <Router>
+    
       <Header CartItem={CartItem} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <Switch>
         <Route path="/" exact>
@@ -82,6 +92,33 @@ function App() {
         <Route path="/store">
           <Stores addToCart={addToCart} /> 
         </Route>
+        <Route path="/product/:id">
+          <Product/>
+        </Route>
+        <Route path="/waiting-screen">
+          <Waiting/>
+        </Route>
+        <Route path="/failure">
+          <Failure/>
+        </Route>
+        <Route path="/success">
+          <Success/>
+        </Route>
+        <Route path="/profile">
+          <Profile/>
+        </Route>
+        <Route path="/history">
+          <History/>
+        </Route>
+        <Route path="/admin">
+            <Dashboard />
+          </Route>
+          <Route path="/adminProducts">
+            <Products/>
+          </Route>
+          <Route path="/register">
+            <Register/>
+          </Route>
 
         <Route path="/cart" exact>
           <Cart CartItem={CartItem} addToCart={addToCart} decreaseQty={decreaseQty} />
@@ -91,7 +128,9 @@ function App() {
         </Route>
       </Switch>
       <Footer />
+
     </Router>
+  
   );
 }
 

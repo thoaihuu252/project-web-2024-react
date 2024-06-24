@@ -10,7 +10,7 @@ export const login = async (phone_number, password) => {
         'Content-Type': 'application/json',
       }
     });
-    const token = response.data.token;
+    const token = response.data;
     return token;
   } catch (error) {
     console.error('Error logging in', error);

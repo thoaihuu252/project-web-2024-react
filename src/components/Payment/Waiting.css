@@ -1,0 +1,22 @@
+.waiting-screen {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .loading-gif {
+    width: 400px; /* Adjust the size as needed */
+    height: 400px; /* Adjust the size as needed */
+  }
+  
+  .timer {
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+  }

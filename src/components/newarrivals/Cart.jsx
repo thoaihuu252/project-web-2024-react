@@ -20,7 +20,7 @@ const Cart = () => {
           return (
             <div className='box' key={index}>
               <div className='img'>
-                <img src={product.thumbnail} alt='' />
+                <img src={product.thumbnail}  style={{width:"160px" ,height:"80px"}}alt='' />
               </div>
               <h4>{product.name}</h4>
               <span>${product.price}</span>
